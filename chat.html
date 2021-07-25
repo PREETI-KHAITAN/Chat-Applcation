@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-chat</title>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="dist/dialog-polyfill.css" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="chat-style.css" />
+</head>
+<body>
+
+	<header class="chat-page-bar">
+		<span onclick="backfun()" class="material-icons back-arrow">arrow_back</span>
+		<span id="chat_user_name" class="name"></span>
+		<span id="chat_user_status" class="status"></span>
+		<span class="dp"><img id="chat_user_image" src="images/dp.jpg"></span>
+		<span id="chat_user_online_status" class="material-icons status-img">radio_button_checked</span>
+		<span id="chat_user_offline_status" class="material-icons status-img">radio_button_unchecked</span>
+		<span onclick="callFun()" class="material-icons call-img">call</span>
+	</header>	
+
+	<header class="chat-page-option-bar">
+		<span onclick="backoptionfun()" class="material-icons back-arrow">arrow_back</span>
+		<span class="material-icons delete-option">delete</span>
+		<span class="material-icons copy-option">content_copy</span>
+		<span class="material-icons forward-option">forward</span>
+		<span class="material-icons reply-option">reply</span>
+	</header>	
+
+	<div class="message-content">
+		<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+		<ul id="message-list">
+		</ul>
+	</div>
+
+	<div id="sticker-box" class="sticker-box">
+		<ul id="sticker-list">
+		</ul>
+		<span class="material-icons sticker-close">clear</span>
+		<ul id="sticker-list-page">
+		</ul>
+	</div>
+
+	<header class="inputer">
+		<div id="add-btn-drawer" class="add-btn-drawer">
+			<span id="cancle-btn" class="material-icons cancle-btn" onclick="closeDrawer()">cancel</span>
+			<span id="current-location" class="material-icons current-location"
+			onclick="sendCurrentLocation()">add_location</span>
+			<span id="live-location" class="material-icons live-location">location_on</span>
+			<span id="file-btn" class="material-icons file-btn" onclick="sendFile()">attach_file</span>
+			<span id="gallery-btn" class="material-icons gallery-btn" onclick="sendImage()">image</span>
+			<span id="camera-btn" class="material-icons camera-btn" onclick="sendCamPic()">camera_alt</span>
+		</div>
+		<span id="openDawer" onclick="openDawer()" class="material-icons add-btn">add_circle</span>
+		<textarea id="message-typed" name="textarea" placeholder="Type here..." autofocus></textarea>
+		<span id="sendMessage" onclick="sendMessage()" class="material-icons send-btn">send</span>
+		<span id="sticker" class="material-icons sticker-btn">trip_origin</span>
+	</header>	
+
+	<div class="replyBox">
+		<div class="replymessageBox">
+			<div class="replyName"></div>
+			<div class="replyText"></div>
+			<span class="material-icons reply-message-cancel reply-cross">clear</span>
+		</div>
+		<div class="replyImgBox">
+			<div class="replyName" style="display: table; padding-right: 8px; border-radius: 10px;"></div>
+			<img class="replyImg">
+			<span class="material-icons reply-img-cancel reply-cross">clear</span>
+		</div>
+		<div class="replyfileBox">
+			<div class="replyName" style="display: table; padding-right: 8px; border-radius: 10px;"></div>
+			<div class="file-box" style="margin-top: 5px;">
+				<span class="material-icons file-icon">description</span><span id="reply_file_name" class="file-text"></span>
+			</div>
+			<span class="material-icons reply-file-cancel reply-cross">clear</span>
+		</div>
+		<div class="replyCurrentLocationBox">
+			<div class="replyName" style="display: table; padding-right: 8px; border-radius: 10px;"></div>
+			<div class="replyText" style="display: table; padding-right: 8px; margin-top: 5px; border-radius: 10px; background-color: #6200EE; color: #fff;">Current Location</div>
+			<img src="images/map.jpg" class="replyImg">
+			<span class="material-icons reply-currentLocation-cancel reply-cross">clear</span>
+		</div>
+	</div>
+
+
+	<dialog class="mdl-dialog" style="border-radius: 20px; z-index: 1; position: fixed; bottom: 30%;">
+	    <h3 class="mdl-dialog__title" style="font-size: 25px;"><span class="material-icons" style="font-size: 30px;color: rgb(0,255,0); vertical-align: sub;padding-right: 10px;">call</span>Calling Mode</h3>
+	    <div class="mdl-dialog__content">
+	      <p>
+	        Please choose the calling mode
+	      </p>
+	    </div>
+	    <div class="mdl-dialog__actions">
+	      <button id="audio_call" type="button" class="mdl-button" style="border-radius: 20px;">Audio Call</button>
+	      <button id="video_call" type="button" class="mdl-button" style="border-radius: 20px;">Video Call</button>
+	    </div>
+	    <div>
+	    	<button id="close" type="button" class="mdl-button" style="float: right; color: red; border-radius: 20px;">Close</button>
+	    </div>
+	</dialog>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script>
+
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Incoming-Call</title>
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="call-receive-style.css" />
+</head>
+<body>
+	<div class="background">
+		<div  class="user-img">
+			<img id="user-img" src="images/dp.jpg">
+		</div>
+		<div class="fields">
+			<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+			<div id="user-name"></div>
+			<div id="user-status">Ringing...</div>
+			<div id="mode"></div>
+		</div>	
+		<div class="buttons">
+		    <button class="answer-call-btn" id="answer"><span class="material-icons answer-call-img">call</span></button>
+		    <button class="end-call-btn" id="leave"><span class="material-icons end-call-img">call_end</span></button>
+		</div>
+	</div>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="vendor/jquery.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script> 
+	<script src="call-receive.js"></script>
+</body>
+</html>

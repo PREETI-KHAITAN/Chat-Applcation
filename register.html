@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-Register</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-light_blue.min.css" />
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+
+
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<header class="main-page">
+		<div class="logo">Macky</div>
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a id="login-link" href="login.html">Login</a></li>
+				<li><a href="register.html" class="active">Register</a></li>
+				<li><a href="about.html">About</a></li>
+			</ul>
+		</nav>
+		<div class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+	</header>
+
+	<div id="register-box" class="wrapper">
+		<h3>Macky Register</h3>
+		<p id="sign-up-error"></p>
+		<input id="register-name-tf" type="name" placeholder="Name">
+		<input id="register-email-tf" type="email" placeholder="Email">
+		<input id="register-password-tf" type="password" placeholder="Password">
+		<button id="register-btn">Register An Account</button>
+		<div id="register-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"
+		style="margin-top: 50px;"></div>
+	</div>
+
+	<div id="register-box-mobile">
+		<h3>Macky Register</h3>
+		<p id="sign-up-error-mobile"></p>
+		<input id="register-name-tf-mobile" type="name" placeholder="Name">
+		<input id="register-email-tf-mobile" type="email" placeholder="Email">
+		<input id="register-password-tf-mobile" type="password" placeholder="Password">
+		<button id="register-btn-mobile">Register An Account</button>
+		<div id="register-progress-m" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"
+		style="margin-top: 50px;"></div>
+	</div>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>

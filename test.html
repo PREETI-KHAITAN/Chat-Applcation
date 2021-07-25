@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-test</title>
+
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="dist/dialog-polyfill.css" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="test.css" />
+</head>
+<body>
+
+	
+	<header class="chat-page-bar">
+		<span onclick="backfun()" class="material-icons back-arrow">arrow_back</span>
+		<span id="chat_user_name" class="name"></span>
+		<span id="chat_user_status" class="status"></span>
+		<span class="dp"><img id="chat_user_image" src="images/dp.jpg"></span>
+		<span id="chat_user_online_status" class="material-icons status-img">radio_button_checked</span>
+		<span id="chat_user_offline_status" class="material-icons status-img">radio_button_unchecked</span>
+		<span onclick="callFun()" class="material-icons call-img">call</span>
+	</header>	
+
+	<header class="chat-page-option-bar">
+		<span onclick="backoptionfun()" class="material-icons back-arrow">arrow_back</span>
+		<span class="material-icons delete-option">delete</span>
+		<span class="material-icons copy-option">content_copy</span>
+		<span class="material-icons forward-option">forward</span>
+		<span class="material-icons reply-option">reply</span>
+	</header>	
+
+	<div class="message-content">
+		<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+		<ul id="message-list">
+			<li id="-MDm1N8e3h7LCsBZFVXh">
+				<img src="https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/profile_images%2FEpRFuFZnsLOGe1BdPlf9AknRB3t1?alt=media&amp;token=2ad80145-22dd-48f9-a6d7-eb619c57279b" class="list-group-item-pic"
+				style="float: right;">
+				<div class="message-box" style="float: right;">
+					<div class="message-time">test  7:27 Am</div>
+					<div class="file-box" onclick="fileOpen('https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/message_files%2F-MDm1N8e3h7LCsBZFVXh_ISXcZgOGgMdSFlSLJrUCpAXigqD2.jpg?alt=media&amp;token=70a5b5c5-9b66-46e5-b81d-de1a5edf5838')">
+						<span class="material-icons file-icon">description</span>
+						<span class="file-text">ISXcZgOGgMdSFlSLJrUCpAXigqD2.jpg</span>
+					</div>
+				</div>
+				<span class="material-icons option-arrow self" style="display: none;">keyboard_arrow_down</span>
+				<span class="material-icons option-reply option-self" style="display: none;">reply</span>
+				<span class="material-icons option-forward option-self" style="display: none;">forward</span>
+			</li>
+			<li id="-MDlmPemTHa0UH52b1bH">
+				<img src="https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/profile_images%2FEpRFuFZnsLOGe1BdPlf9AknRB3t1?alt=media&amp;token=2ad80145-22dd-48f9-a6d7-eb619c57279b" class="list-group-item-pic" style="float: right;">
+				<div class="message-box" style="float: right;">
+					<div class="message-time">test  6:17 Am</div>
+					<div class="message-text">test2</div>
+				</div>
+				<span class="material-icons option-arrow self" style="display: none;">keyboard_arrow_down</span>
+				<span class="material-icons option-reply option-self" style="display: none;">reply</span>
+				<span class="material-icons option-forward option-self" style="display: none;">forward</span>
+			</li>
+			<li id="-MDleHH15Q8wZgaKJpVM">
+				<img src="https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/profile_images%2FEpRFuFZnsLOGe1BdPlf9AknRB3t1?alt=media&amp;token=2ad80145-22dd-48f9-a6d7-eb619c57279b" class="list-group-item-pic" style="float: right;">
+				<div class="message-box" style="float: right;">
+					<div class="message-time">test  5:41 Am</div>
+					<div class="message-text" style="background-color: #6200EE; border-radius: 5px; margin: 5px; padding-left: 5px;">current location</div>
+					<img src="images/map.jpg" class="message-image" style="cursor: pointer;" onclick="openLocation(&quot;12.9715987,77.5945627&quot;)">
+				</div>
+				<span class="material-icons option-arrow self" style="display: none;">keyboard_arrow_down</span>
+				<span class="material-icons option-reply option-self" style="display: none;">reply</span>
+				<span class="material-icons option-forward option-self" style="display: none;">forward</span>
+			</li>
+			<li id="-MDlTx6PMvpyuYiO5dr1">
+				<img src="https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/profile_images%2FEpRFuFZnsLOGe1BdPlf9AknRB3t1?alt=media&amp;token=2ad80145-22dd-48f9-a6d7-eb619c57279b" class="list-group-item-pic" style="float: right;">
+				<div class="message-box" style="float: right;">
+					<div class="message-time">test  4:52 Am</div>
+					<img src="https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/message_images%2F-MDlTx6PMvpyuYiO5dr1.jpg?alt=media&amp;token=59bce4b7-c1bc-4a6d-bb36-89b2936e469e" class="message-image" style="cursor: pointer;" onclick="fileOpen(&quot;https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/message_images%2F-MDlTx6PMvpyuYiO5dr1.jpg?alt=media&amp;token=59bce4b7-c1bc-4a6d-bb36-89b2936e469e&quot;)">
+				</div>
+				<span class="material-icons option-arrow self" style="display: none;">keyboard_arrow_down</span>
+				<span class="material-icons option-reply option-self" style="display: none;">reply</span>
+				<span class="material-icons option-forward option-self" style="display: none;">forward</span>
+			</li>
+			<li id="-MDX0W5c2puUToE4prRr">
+				<img src="https://firebasestorage.googleapis.com/v0/b/web-chat-a60b3.appspot.com/o/profile_images%2FEpRFuFZnsLOGe1BdPlf9AknRB3t1?alt=media&amp;token=2ad80145-22dd-48f9-a6d7-eb619c57279b" class="list-group-item-pic" style="float: right;">
+				<div class="message-box" style="float: right;">
+					<div class="message-time">test  4:49 Am , 31-7-2020</div>
+					<img src="sticker/baby/5.webp" class="message-image">
+				</div>
+				<span class="material-icons option-arrow self" style="display: none;">keyboard_arrow_down</span>
+				<span class="material-icons option-reply option-self" style="display: none;">reply</span>
+				<span class="material-icons option-forward option-self" style="display: none;">forward</span>
+			</li>
+		</ul>
+	</div>
+
+	<div id="sticker-box" class="sticker-box">
+		<ul id="sticker-list">
+		</ul>
+		<ul id="sticker-list-page">
+		</ul>
+	</div>
+
+	<header class="inputer">
+		<div id="add-btn-drawer" class="add-btn-drawer">
+			<span id="cancle-btn" class="material-icons cancle-btn" onclick="closeDrawer()">cancel</span>
+			<span id="current-location" class="material-icons current-location"
+			onclick="sendCurrentLocation()">add_location</span>
+			<span id="live-location" class="material-icons live-location">location_on</span>
+			<span id="file-btn" class="material-icons file-btn" onclick="sendFile()">attach_file</span>
+			<span id="gallery-btn" class="material-icons gallery-btn" onclick="sendImage()">image</span>
+			<span id="camera-btn" class="material-icons camera-btn" onclick="sendCamPic()">camera_alt</span>
+		</div>
+		<span id="openDawer" onclick="openDawer()" class="material-icons add-btn">add_circle</span>
+		<textarea id="message-typed" name="textarea" placeholder="Type here..." autofocus></textarea>
+		<span id="sendMessage" onclick="sendMessage()" class="material-icons send-btn">send</span>
+		<span id="sticker" class="material-icons sticker-btn">trip_origin</span>
+	</header>	
+
+
+	<dialog class="mdl-dialog" style="border-radius: 20px; z-index: 1; position: fixed; bottom: 30%;">
+	    <h3 class="mdl-dialog__title" style="font-size: 25px;"><span class="material-icons" style="font-size: 30px;color: rgb(0,255,0); vertical-align: sub;padding-right: 10px;">call</span>Calling Mode</h3>
+	    <div class="mdl-dialog__content">
+	      <p>
+	        Please choose the calling mode
+	      </p>
+	    </div>
+	    <div class="mdl-dialog__actions">
+	      <button id="audio_call" type="button" class="mdl-button" style="border-radius: 20px;">Audio Call</button>
+	      <button id="video_call" type="button" class="mdl-button" style="border-radius: 20px;">Video Call</button>
+	    </div>
+	    <div>
+	    	<button id="close" type="button" class="mdl-button" style="float: right; color: red; border-radius: 20px;">Close</button>
+	    </div>
+	</dialog>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script> 
+	<script src="vendor/jquery.min.js"></script>
+	<script src="test.js"></script>
+</body>
+</html>

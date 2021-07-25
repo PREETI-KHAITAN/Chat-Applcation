@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-all-user</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="all-user-style.css" />
+</head>
+<body>
+	<header class="main-page-bar">
+		<div class="logo">Macky</div>
+		<nav id="side-bar">
+			<ul>
+				<li><a href="main.html">Home</a></li>
+				<li><a id="account-setting" href="account-setting.html">Account Settings</a></li>
+				<li><a href="all-user.html" class="active">All Users</a></li>
+				<button onclick="user_sign_out()">Sign Out</button>
+			</ul>
+		</nav>
+		<div class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+	</header>
+
+	<div class="page-contaner">
+		<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+		<ul id="list-group" class="list-group">
+	  	</ul>
+	</div>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script>
+
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="all-user.js"></script>
+</body>
+</html>

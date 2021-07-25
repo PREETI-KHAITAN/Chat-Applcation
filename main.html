@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-main</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-light_blue.min.css" />
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="main-style.css" />
+</head>
+<body>
+	<header class="main-page-bar">
+		<div class="logo">Macky</div>
+		<nav>
+			<ul>
+				<li><a href="main.html" class="active">Home</a></li>
+				<li><a id="account-setting" href="account-setting.html">Account Settings</a></li>
+				<li><a href="all-user.html">All Users</a></li>
+				<button onclick="user_sign_out()">Sign Out</button>
+			</ul>
+		</nav>
+		<div class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+	</header>
+	<div class="tab-btn">
+		<button class="tablink"  onclick="onclickTab('friend-request-tab',this)">Friend Request</button>
+		<button class="tablink active" onclick="onclickTab('chats-tab',this)">Chats</button>
+		<button class="tablink" onclick="onclickTab('friends-tab',this)">Friends</button>
+	</div>
+
+	<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+
+	<div id="friend-request-tab" class="tabcontent">
+	  <ul id="friend-request-list" class="list-group">
+	  </ul>
+	</div>
+
+	<div id="chats-tab" class="tabcontent">
+	  <ul id="chat-list" class="list-group" style="transform: rotate(180deg);">
+	  </ul>
+	</div>
+
+	<div id="friends-tab" class="tabcontent">
+	  <ul id="friend-list" class="list-group">
+	  </ul>
+	</div>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-profile-viewer</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="profile-viewer-style.css" />
+</head>
+<body>
+	<header class="main-page-bar">
+		<div class="logo">Macky</div>
+		<nav>
+			<ul>
+				<li><a href="main.html">Home</a></li>
+				<li><a id="account-setting" href="account-setting.html">Account Settings</a></li>
+				<li><a href="all-user.html">All Users</a></li>
+				<button onclick="user_sign_out()">Sign Out</button>
+			</ul>
+		</nav>
+		<div class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+	</header>
+
+	<span onclick="backfun()" class="material-icons back-arrow">arrow_back
+		</span>
+
+	<div  class="user-img">
+		<img id="user-img" src="images/dp.jpg">
+	</div>
+	<div class="fields">
+		<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+		<div id="user-name"></div>
+		<div id="user-status"></div>
+		<button id="sendRequest">SEND FRIEND REQUEST</button>
+		<button id="cancleRequest">DECLINE FRIEND REQUEST</button>
+	</div>	
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+	
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script>
+
+	
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="profile-viewer.js"></script>
+</body>
+</html>

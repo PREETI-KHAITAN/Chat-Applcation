@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Macky-Friends</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="all-user-style.css" />
+</head>
+<body>
+	<header class="main-page-bar">
+		<div class="logo">Macky</div>
+		<nav id="side-bar">
+			<ul>
+				<li><a href="main.html">Home</a></li>
+				<li><a id="account-setting" href="account-setting.html">Account Settings</a></li>
+				<li><a href="all-user.html">All Users</a></li>
+				<button onclick="user_sign_out()">Sign Out</button>
+			</ul>
+		</nav>
+		<div class="menu-toggle"><i class="fa fa-bars" aria-hidden="true"></i></div>
+	</header>
+
+	<div class="page-contaner">
+		<div id="loader" class="mdl-spinner mdl-js-spinner is-active"></div>
+		<ul id="list-group" class="list-group">
+	  	</ul>
+	</div>
+
+	<div class="toast">
+		<div id="toast-text">
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+	<script src="Scripts/firebase.init.js"></script>
+
+	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.menu-toggle').click(function(){
+				$('#side-bar').toggleClass('active');
+			});
+		});
+
+		var dataPassing = decodeURIComponent(window.location.search);
+		chatuserID = dataPassing.substring(1);
+		var page = chatuserID.split("&");
+		chatuserID = page[0];
+		messageID = page[1];
+		var currentuserId = "";
+
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (!user) {
+		   	window.location.href = 'login.html';
+		  } else {
+		    currentuserId = user.uid;
+		    showusers(currentuserId);
+		    checkCall(currentuserId);
+		  }
+		});
+		function user_sign_out() {
+		    firebase.auth().signOut().then(function() {
+		      window.location.href = 'index.html';
+		  }).catch(function(error) {
+		    makeToast(error.message)
+		  });
+		}
+
+		function showusers(currentuserId) {
+		  var usersDatabase = firebase.database().ref().child("Users");
+		  var friend_database = firebase.database().ref().child("Friends").child(currentuserId);
+		  friend_database.on('child_added', function(datasnapshot) {
+		    var userId,userName,userStatus,thumb_img;
+		    userId = datasnapshot.key;
+		    usersDatabase.child(userId).once("value", function(snapshot) {
+		    	userName = snapshot.child("name").val();
+			    userStatus = snapshot.child("status").val();
+			    thumb_img = snapshot.child("thumb_image").val();
+			    if(currentuserId != userId) {
+			      user_list_creater(userId,userName,userStatus,thumb_img);
+			    }
+		    });
+		  });
+
+		  usersDatabase.on('child_removed', function(datasnapshot) {
+		    $("#" + datasnapshot.key).remove();
+		  });
+		  $("#loader").hide();
+		}
+
+		function user_list_creater(userId,userName,userStatus,thumb_img) {
+		    var link = document.createElement("li"); 
+		    var img = document.createElement("img")
+		    var divcol = document.createElement("div");
+		    var divrow = document.createElement("div");
+		    var divName = document.createElement("div");
+		    var divLastText = document.createElement("div");
+		    link.setAttribute("id", userId);
+		    link.setAttribute("class", "list-group-item");
+		    link.setAttribute("onclick", "profileOpen(this.id)");
+		    if(thumb_img != "default"){
+		      img.setAttribute("src", thumb_img);
+		    } else {
+		      img.setAttribute("src", "images/dp.jpg");
+		    }
+		    img.setAttribute("class", "list-group-item-pic");
+		    divcol.setAttribute("class", "col-2");
+		    divrow.setAttribute("class", "row");
+		    divName.setAttribute("class", "name");
+		    divLastText.setAttribute("class", "message");
+		    var text_name = document.createTextNode(userName); 
+		    var text_last_text = document.createTextNode(userStatus);
+		    divName.appendChild(text_name);
+		    divLastText.appendChild(text_last_text);
+		    divcol.appendChild(divName);
+		    divcol.appendChild(divLastText);
+		    divrow.appendChild(img);
+		    divrow.appendChild(divcol);
+		    link.appendChild(divrow);      
+		    document.getElementById("list-group").appendChild(link);
+		}
+
+		function profileOpen(userId) {
+		  if(currentuserId != "") {
+		  	var messages_database = firebase.database().ref().child("messages");
+		  	var mmessage = "",mtype = "",id = "";
+		  	messages_database.child(currentuserId).child(chatuserID).child(messageID).once("value", function(snapshot) {
+		  		mmessage = snapshot.child("message").val();
+		  		mtype = snapshot.child("type").val();
+		  		var push_id = messages_database.child(currentuserId).child(userId).push().key;
+		  		var date = new Date();
+				var strDate = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+				var current_time = date.getHours() + ":" + date.getMinutes();
+				if(mtype == "file") {
+					var fileName = getFileName(snapshot.child("push_id").val());
+		  			id = push_id+"_"+fileName;
+		  		}else {
+		  			id = push_id;
+		  		}
+		  		messages_database.child(currentuserId).child(userId).child(push_id).update({
+		  			date: strDate,
+					from: currentuserId,
+					message: mmessage,
+					push_id: id,
+					time: current_time,
+					timestamp: firebase.database.ServerValue.TIMESTAMP,
+					type: mtype
+		  		}).then(function() {
+		  			messages_database.child(userId).child(currentuserId).child(push_id).update({
+			  			date: strDate,
+						from: currentuserId,
+						message: mmessage,
+						push_id: id,
+						time: current_time,
+						timestamp: firebase.database.ServerValue.TIMESTAMP,
+						type: mtype
+			  		}).then(function() {
+			  			var chat_update_database = firebase.database().ref().child("Chat").child(userId);
+						chat_update_database.once('value', function(snapshot) {
+							if(!snapshot.hasChild(currentuserId)) {
+								chat_update_database.child(currentuserId).update({
+									timestamp: firebase.database.ServerValue.TIMESTAMP
+								});
+							}
+						}).then(function() {
+							window.location.href = 'chat.html?'+userId;
+						});
+			  		});
+		  		});
+		  	});
+		  }
+		}
+
+		function checkCall(currentuserId) {
+		  firebase.database().ref().child("Users").child(currentuserId).on("value", function(snapshot) {
+		    if(snapshot.hasChild("calledBy") && snapshot.hasChild("type") && snapshot.hasChild("call_channel_id")) {
+		      var calledBy = snapshot.child("calledBy").val();
+		      var type = snapshot.child("type").val();
+		      var call_channel = snapshot.child("call_channel_id").val();
+		      if(calledBy != "none" && type != "none" && call_channel != "none") {
+		        window.location.href = "call-receive.html?" + calledBy + "&" + call_channel;
+		      }
+		    }
+		  });
+		}
+
+		function makeToast(text) {
+		  $(".toast").show();
+		  $("#toast-text").text(text);
+		  setTimeout(function() {
+		    $(".toast").hide();
+		  }, 3000);
+		}
+
+		function getFileName(push_id) {
+			var index = push_id.lastIndexOf('_');
+			var filename = push_id.substring(index+1);
+			return filename;
+		}
+	</script>
+</body>
+</html>
